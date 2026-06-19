@@ -48,20 +48,20 @@ Main fields include:
 
 ```text
 CSV file
-   ↓
+   â†“
 Python / pandas load process
-   ↓
+   â†“
 MySQL raw table: raw_orders
-   ↓
+   â†“
 SQL staging view: stg_valid_orders
-   ↓
+   â†“
 Star schema tables
-   ├── dim_customers
-   ├── dim_products
-   └── fact_orders
-   ↓
+   â”œâ”€â”€ dim_customers
+   â”œâ”€â”€ dim_products
+   â””â”€â”€ fact_orders
+   â†“
 SQL analytics queries
-   ↓
+   â†“
 Power BI dashboard
 ```
 
@@ -180,8 +180,8 @@ The Power BI report contains four pages:
 Power BI model relationships:
 
 ```text
-dim_customers[customer_id] 1 → * fact_orders[customer_id]
-dim_products[product_id]  1 → * fact_orders[product_id]
+dim_customers[customer_id] 1 â†’ * fact_orders[customer_id]
+dim_products[product_id]  1 â†’ * fact_orders[product_id]
 ```
 
 Core DAX measures:
@@ -194,6 +194,25 @@ Average Order Value = DIVIDE([Total Revenue], [Total Orders])
 Total Shipping Cost = SUM('ecommerce_dw fact_orders'[shipping_cost])
 Average Discount = AVERAGE('ecommerce_dw fact_orders'[discount])
 ```
+
+
+## Dashboard Preview
+
+### Executive Overview
+
+![Executive Overview](docs/images/executive_overview.jpg)
+
+### Product Analysis
+
+![Product Analysis](docs/images/product_analysis.jpg)
+
+### Customer Analysis
+
+![Customer Analysis](docs/images/customer_analysis.jpg)
+
+### Operations Analysis
+
+![Operations Analysis](docs/images/operations_analysis.jpg)
 
 ## SQL Analytics Examples
 
@@ -249,24 +268,24 @@ sql/06_analytics_queries.sql
 
 ```text
 ecommerce-sales-etl-elt-analytics/
-├── data/
-│   └── raw/
-│       └── amazon_sales_dataset.csv
-├── docs/
-├── notebooks/
-├── pipelines/
-├── powerbi/
-│   └── ecommerce_sales_dashboard.pbix
-├── sql/
-│   ├── 01_database_setup.sql
-│   ├── 02_staging_layer.sql
-│   ├── 03_dimensions.sql
-│   ├── 04_fact_table.sql
-│   ├── 05_quality_checks.sql
-│   └── 06_analytics_queries.sql
-├── .gitignore
-├── README.md
-└── requirements.txt
+â”œâ”€â”€ data/
+â”‚   â””â”€â”€ raw/
+â”‚       â””â”€â”€ amazon_sales_dataset.csv
+â”œâ”€â”€ docs/
+â”œâ”€â”€ notebooks/
+â”œâ”€â”€ pipelines/
+â”œâ”€â”€ powerbi/
+â”‚   â””â”€â”€ ecommerce_sales_dashboard.pbix
+â”œâ”€â”€ sql/
+â”‚   â”œâ”€â”€ 01_database_setup.sql
+â”‚   â”œâ”€â”€ 02_staging_layer.sql
+â”‚   â”œâ”€â”€ 03_dimensions.sql
+â”‚   â”œâ”€â”€ 04_fact_table.sql
+â”‚   â”œâ”€â”€ 05_quality_checks.sql
+â”‚   â””â”€â”€ 06_analytics_queries.sql
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ README.md
+â””â”€â”€ requirements.txt
 ```
 
 ## Future Improvements
