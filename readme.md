@@ -48,21 +48,15 @@ Main fields include:
 
 ```text
 CSV file
-   â†“
-Python / pandas load process
-   â†“
-MySQL raw table: raw_orders
-   â†“
-SQL staging view: stg_valid_orders
-   â†“
-Star schema tables
-   â”œâ”€â”€ dim_customers
-   â”œâ”€â”€ dim_products
-   â””â”€â”€ fact_orders
-   â†“
-SQL analytics queries
-   â†“
-Power BI dashboard
+  -> Python / pandas load process
+  -> MySQL raw table: raw_orders
+  -> SQL staging view: stg_valid_orders
+  -> Star schema tables
+       - dim_customers
+       - dim_products
+       - fact_orders
+  -> SQL analytics queries
+  -> Power BI dashboard
 ```
 
 ## ETL / ELT Workflow
@@ -180,8 +174,8 @@ The Power BI report contains four pages:
 Power BI model relationships:
 
 ```text
-dim_customers[customer_id] 1 â†’ * fact_orders[customer_id]
-dim_products[product_id]  1 â†’ * fact_orders[product_id]
+dim_customers[customer_id] 1 -> * fact_orders[customer_id]
+dim_products[product_id]  1 -> * fact_orders[product_id]
 ```
 
 Core DAX measures:
@@ -194,7 +188,6 @@ Average Order Value = DIVIDE([Total Revenue], [Total Orders])
 Total Shipping Cost = SUM('ecommerce_dw fact_orders'[shipping_cost])
 Average Discount = AVERAGE('ecommerce_dw fact_orders'[discount])
 ```
-
 
 ## Dashboard Preview
 
@@ -251,6 +244,7 @@ USE ecommerce_dw;
 ```bash
 python pipelines/etl_python/load_raw_to_mysql.py
 ```
+
 5. Run the SQL scripts in order:
 
 ```text
@@ -268,36 +262,38 @@ sql/06_analytics_queries.sql
 
 ```text
 ecommerce-sales-etl-elt-analytics/
-â”œâ”€â”€ data/
-â”‚   â””â”€â”€ raw/
-â”‚       â””â”€â”€ amazon_sales_dataset.csv
-â”œâ”€â”€ docs/
-â”œâ”€â”€ notebooks/
-â”œâ”€â”€ pipelines/
-â”œâ”€â”€ powerbi/
-â”‚   â””â”€â”€ ecommerce_sales_dashboard.pbix
-â”œâ”€â”€ sql/
-â”‚   â”œâ”€â”€ 01_database_setup.sql
-â”‚   â”œâ”€â”€ 02_staging_layer.sql
-â”‚   â”œâ”€â”€ 03_dimensions.sql
-â”‚   â”œâ”€â”€ 04_fact_table.sql
-â”‚   â”œâ”€â”€ 05_quality_checks.sql
-â”‚   â””â”€â”€ 06_analytics_queries.sql
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ README.md
-â””â”€â”€ requirements.txt
+|-- data/
+|   `-- raw/
+|       `-- amazon_sales_dataset.csv
+|-- docs/
+|   `-- images/
+|-- notebooks/
+|-- pipelines/
+|   `-- etl_python/
+|       `-- load_raw_to_mysql.py
+|-- powerbi/
+|   `-- ecommerce_sales_dashboard.pbix
+|-- sql/
+|   |-- 01_database_setup.sql
+|   |-- 02_staging_layer.sql
+|   |-- 03_dimensions.sql
+|   |-- 04_fact_table.sql
+|   |-- 05_quality_checks.sql
+|   `-- 06_analytics_queries.sql
+|-- .env.example
+|-- .gitignore
+|-- README.md
+`-- requirements.txt
 ```
 
 ## Future Improvements
 
 - Add a dedicated date dimension table
-- Add an automated Python loading script
 - Add dbt-style SQL transformations
-- Add Power BI screenshots to the README
 - Add more detailed customer segmentation
 - Add delivery time analysis using `order_date`, `ship_date`, and `delivery_date`
+- Add automated tests for data quality checks
 
 ## Security Note
 
 Database passwords and local connection details should not be committed to GitHub. Use environment variables or a `.env` file excluded by `.gitignore`.
-
