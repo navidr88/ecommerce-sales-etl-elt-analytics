@@ -21,11 +21,13 @@ The project uses a synthetic Amazon-style e-commerce dataset, so the focus is on
 
 Source: Kaggle E-commerce Sales Dataset
 
-Raw file:
+Raw file location after download:
 
 ```text
 data/raw/amazon_sales_dataset.csv
 ```
+
+Note: The raw CSV file is not committed to this repository. Download it from Kaggle and place it under `data/raw/`.
 
 Initial dataset profile:
 
@@ -264,7 +266,7 @@ sql/06_analytics_queries.sql
 ecommerce-sales-etl-elt-analytics/
 |-- data/
 |   `-- raw/
-|       `-- amazon_sales_dataset.csv
+|       `-- place amazon_sales_dataset.csv here (not committed)
 |-- docs/
 |   `-- images/
 |-- notebooks/
