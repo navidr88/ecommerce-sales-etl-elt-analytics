@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Environment / secrets
+.env
+*.env
+config.ini
+secrets.*
+
+# Local database / exports
+*.sqlite
+*.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Power BI temporary files
+*.tmp
+~$*.pbix
+
+# Large raw exports can be excluded if needed
+# data/raw/*.csv
+data/raw/*.csv
